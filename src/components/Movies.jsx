@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { fetchMovies } from '../server/server';
 
 const Movies = () => {
@@ -25,7 +26,9 @@ const Movies = () => {
       <button onClick={handleSearch}>Search</button>
       <ul>
         {searchResults.map(movie => (
-          <li key={movie.id}>{movie.title}</li>
+          <li key={movie.id}>
+            <Link to={`/movie/${movie.id}`}>{movie.title}</Link>
+          </li>
         ))}
       </ul>
     </div>

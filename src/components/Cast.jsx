@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchCast } from '../server/server'; // Припустимо, у вас є функція для отримання акторського складу
+import { fetchCast } from '../server/server';
 
 const Cast = () => {
   const { movieId } = useParams();
@@ -24,7 +24,7 @@ const Cast = () => {
       <h2>Cast</h2>
       <ul>
         {cast.map(member => (
-          <li key={member.id}>{member.name}</li>
+          <li key={member.castId}>{member.actorName}</li>
         ))}
       </ul>
     </div>

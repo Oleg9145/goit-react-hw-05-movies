@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link, Outlet } from 'react-router-dom';
 import { fetchMovieDetails } from '../server/server';
 
 const MovieDetails = () => {
@@ -25,7 +25,17 @@ const MovieDetails = () => {
         <>
           <h1>{movieDetails.title}</h1>
           <p>{movieDetails.overview}</p>
-          {/* інші деталі фільму */}
+          <nav>
+            <ul>
+              <li>
+                <Link to={`/movies/${movieId}/cast`}>Cast</Link>
+              </li>
+              <li>
+                <Link to={`/movies/${movieId}/reviews`}>Reviews</Link>
+              </li>
+            </ul>
+          </nav>
+          <Outlet /> {/* Відображення вкладених компонентів */}
         </>
       ) : (
         <p>Loading...</p>

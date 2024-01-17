@@ -4,21 +4,19 @@ const KEY = 'b8d685aa89f64a6cf112c60dddfc9250';
 const BASE_URL = 'https://api.themoviedb.org/3/';
 
 export const fetchTrendingMovies = async (
-  timeWindow = 'day',
+  timeWindow = 'day', // Ви можете змінювати часовий вікно ('day', 'week', тощо)
   page = 1,
   language = 'en-US'
 ) => {
   try {
-    const response = await axios.get(
-      `${BASE_URL}trending/movie/${timeWindow}`,
-      {
-        params: {
-          api_key: KEY,
-          page: page,
-          language: language,
-        },
-      }
-    );
+    const response = await axios.get(`${BASE_URL}trending/all/${timeWindow}`, {
+      // Змінили 'movie' на 'all', щоб отримати всі типи медіа
+      params: {
+        api_key: KEY,
+        page: page,
+        language: language,
+      },
+    });
 
     return response.data.results.map(
       ({ id, title, overview, poster_path }) => ({
@@ -101,6 +99,24 @@ export const fetchCast = async movieId => {
     );
   } catch (error) {
     console.error('Error fetching movie cast:', error);
+    throw error;
+  }
+};
+export const fetchMovieReviews = async (movieId, page = 1) => {
+  try {
+    const response = await axios.get(`${BASE_URL}movie/${movieId}/reviews`, {
+      params: {
+        api_key: KEY,
+        page: page,
+      },
+    });
+
+    return response.data.results.map(({ id, author, content }) => ({
+      id,
+      author,
+      content,
+    }));
+  } catch (error) {
     throw error;
   }
 };
