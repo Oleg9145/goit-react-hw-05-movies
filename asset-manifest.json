@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/oleg9145.github.io/goit-react-hw-05-movies/static/css/main.e2cab22d.css",
+    "main.js": "/oleg9145.github.io/goit-react-hw-05-movies/static/js/main.1e9a2f05.js",
+    "index.html": "/oleg9145.github.io/goit-react-hw-05-movies/index.html",
+    "main.e2cab22d.css.map": "/oleg9145.github.io/goit-react-hw-05-movies/static/css/main.e2cab22d.css.map",
+    "main.1e9a2f05.js.map": "/oleg9145.github.io/goit-react-hw-05-movies/static/js/main.1e9a2f05.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e2cab22d.css",
+    "static/js/main.1e9a2f05.js"
+  ]
+}
