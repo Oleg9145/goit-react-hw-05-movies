@@ -4,13 +4,12 @@ const KEY = 'b8d685aa89f64a6cf112c60dddfc9250';
 const BASE_URL = 'https://api.themoviedb.org/3/';
 
 export const fetchTrendingMovies = async (
-  timeWindow = 'day', // Ви можете змінювати часовий вікно ('day', 'week', тощо)
+  timeWindow = 'day',
   page = 1,
   language = 'en-US'
 ) => {
   try {
     const response = await axios.get(`${BASE_URL}trending/all/${timeWindow}`, {
-      // Змінили 'movie' на 'all', щоб отримати всі типи медіа
       params: {
         api_key: KEY,
         page: page,
@@ -71,7 +70,6 @@ export const fetchMovieDetails = async movieId => {
       posterURL: `https://api.themoviedb.org/3/movie/${movieId}/images`,
       genres: response.data.genres.map(genre => genre.name).join(', '),
       releaseDate: response.data.release_date,
-      // Інші деталі фільму, якщо потрібно
     };
   } catch (error) {
     console.error('Error fetching movie details:', error);
@@ -93,7 +91,7 @@ export const fetchCast = async movieId => {
         actorName: name,
         characterName: character,
         profilePicURL: profile_path
-          ? `https://api.themoviedb.org/3/movie/${movieId}/images`
+          ? `https://image.tmdb.org/t/p/w500${profile_path}`
           : null,
       })
     );
@@ -102,6 +100,7 @@ export const fetchCast = async movieId => {
     throw error;
   }
 };
+
 export const fetchMovieReviews = async (movieId, page = 1) => {
   try {
     const response = await axios.get(`${BASE_URL}movie/${movieId}/reviews`, {

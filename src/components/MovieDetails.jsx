@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link, Outlet } from 'react-router-dom';
+import { useParams, Link, Outlet, useNavigate } from 'react-router-dom';
 import { fetchMovieDetails } from '../server/server';
-
 const MovieDetails = () => {
   const { movieId } = useParams();
-  const [movieDetails, setMovieDetails] = useState(null);
+  const navigate = useNavigate();
+  const [movieDetails, setMovieDetails] = useState({});
 
   useEffect(() => {
-    const fetchDetails = async () => {
+    const fetchMovieDetailsData = async () => {
       try {
         const details = await fetchMovieDetails(movieId);
         setMovieDetails(details);
@@ -16,11 +16,12 @@ const MovieDetails = () => {
       }
     };
 
-    fetchDetails();
+    fetchMovieDetailsData();
   }, [movieId]);
 
   return (
     <div>
+      <button onClick={() => navigate(-1)}>Go Back</button>
       {movieDetails ? (
         <>
           <h1>{movieDetails.title}</h1>
@@ -35,7 +36,7 @@ const MovieDetails = () => {
               </li>
             </ul>
           </nav>
-          <Outlet /> {/* Відображення вкладених компонентів */}
+          <Outlet />
         </>
       ) : (
         <p>Loading...</p>

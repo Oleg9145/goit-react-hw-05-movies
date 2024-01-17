@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { fetchMovies } from '../server/server';
 
 const Movies = () => {
   const [query, setQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const navigate = useNavigate();
 
   const handleSearch = async () => {
     try {
       const results = await fetchMovies(query);
       setSearchResults(results);
+      navigate(`/movies?query=${query}`);
     } catch (error) {
       console.error(error);
     }
@@ -17,6 +19,8 @@ const Movies = () => {
 
   return (
     <div>
+      {' '}
+      <button onClick={() => navigate(-1)}>Go Back</button>
       <h1>Search Movies</h1>
       <input
         type="text"

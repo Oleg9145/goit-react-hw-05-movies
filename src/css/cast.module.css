@@ -1,0 +1,52 @@
+.divContainer {
+  padding: 20px;
+  background-color: #f0f0f0;
+}
+
+.heading {
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.castList {
+  list-style-type: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 15px;
+}
+
+.castListItem {
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f8f8f8;
+}
+
+.castImage {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.actorName,
+.characterName {
+  margin: 5px 0;
+  color: #333;
+}
+.goBackButton {
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.goBackButton:hover {
+  background-color: #0056b3;
+}

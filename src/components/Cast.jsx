@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchCast } from '../server/server';
-
+import { useNavigate } from 'react-router-dom';
+import css from '../css/cast.module.css';
 const Cast = () => {
   const { movieId } = useParams();
   const [cast, setCast] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchMovieCast = async () => {
@@ -20,11 +22,24 @@ const Cast = () => {
   }, [movieId]);
 
   return (
-    <div>
-      <h2>Cast</h2>
-      <ul>
+    <div className={css.divContainer}>
+      <button onClick={() => navigate(-1)} className={css.goBackButton}>
+        Go Back
+      </button>
+      <h2 className={css.heading}>Cast</h2>
+      <ul className={css.castList}>
         {cast.map(member => (
-          <li key={member.castId}>{member.actorName}</li>
+          <li key={member.castId} className={css.castListItem}>
+            {member.profilePicURL && (
+              <img
+                src={member.profilePicURL}
+                alt={member.actorName}
+                className={css.castImage}
+              />
+            )}
+            <p className={css.actorName}>{member.actorName}</p>
+            <p className={css.characterName}>{member.characterName}</p>
+          </li>
         ))}
       </ul>
     </div>

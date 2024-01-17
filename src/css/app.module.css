@@ -1,0 +1,27 @@
+.header {
+  background-color: #a882e6;
+  padding: 10px 20px;
+  text-align: left;
+}
+
+.header ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.header li {
+  display: inline;
+  margin-right: 20px;
+}
+
+.header a {
+  padding-right: 5px;
+  color: #333;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.header a:hover {
+  color: #007bff;
+}
