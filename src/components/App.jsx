@@ -20,7 +20,7 @@ const Reviews = lazy(() =>
 
 function App() {
   return (
-    <Router basename="/">
+    <Router basename="">
       <div className={css.header}>
         <ul>
           <li>
