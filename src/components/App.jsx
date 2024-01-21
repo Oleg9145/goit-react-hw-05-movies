@@ -1,7 +1,7 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import css from '../css/app.module.css';
-
+import { NotFound } from './Notfound';
 const Home = lazy(() =>
   import('./Home').then(module => ({ default: module.Home }))
 );
@@ -10,12 +10,6 @@ const Movies = lazy(() =>
 );
 const MovieDetails = lazy(() =>
   import('./MovieDetails').then(module => ({ default: module.MovieDetails }))
-);
-const Cast = lazy(() =>
-  import('./Cast').then(module => ({ default: module.Cast }))
-);
-const Reviews = lazy(() =>
-  import('./Reviews').then(module => ({ default: module.Reviews }))
 );
 
 function App() {
@@ -40,8 +34,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/movies/" element={<Movies />} />
           <Route path="/movie/:movieId" element={<MovieDetails />} />
-          <Route path="/movies/:movieId/cast" element={<Cast />} />
-          <Route path="/movies/:movieId/reviews" element={<Reviews />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
     </Router>

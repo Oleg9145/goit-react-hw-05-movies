@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link, Outlet, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { fetchMovieDetails } from '../server/server';
+import { Cast } from './Cast';
+import { Reviews } from './Reviews';
+
 const MovieDetails = () => {
   const { movieId } = useParams();
   const navigate = useNavigate();
@@ -26,17 +29,8 @@ const MovieDetails = () => {
         <>
           <h1>{movieDetails.title}</h1>
           <p>{movieDetails.overview}</p>
-          <nav>
-            <ul>
-              <li>
-                <Link to={`/movies/${movieId}/cast`}>Cast</Link>
-              </li>
-              <li>
-                <Link to={`/movies/${movieId}/reviews`}>Reviews</Link>
-              </li>
-            </ul>
-          </nav>
-          <Outlet />
+          <Cast movieId={movieId} />
+          <Reviews movieId={movieId} />
         </>
       ) : (
         <p>Loading...</p>

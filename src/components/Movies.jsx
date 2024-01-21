@@ -1,25 +1,39 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { fetchMovies } from '../server/server';
 
 const Movies = () => {
   const [query, setQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const handleSearch = async () => {
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const searchQuery = params.get('query');
+
+    if (searchQuery) {
+      setQuery(searchQuery);
+      fetchAndSetMovies(searchQuery);
+    }
+  }, [location.search]);
+
+  const fetchAndSetMovies = async query => {
     try {
       const results = await fetchMovies(query);
       setSearchResults(results);
-      navigate(`/movies?query=${query}`);
     } catch (error) {
       console.error(error);
     }
   };
 
+  const handleSearch = async () => {
+    navigate(`/movies?query=${query}`);
+    fetchAndSetMovies(query);
+  };
+
   return (
     <div>
-      {' '}
       <button onClick={() => navigate(-1)}>Go Back</button>
       <h1>Search Movies</h1>
       <input
