@@ -27,9 +27,8 @@ const Reviews = lazy(() =>
 
 function App() {
   return (
-    <Router>
+    <Router basename="/goit-react-hw-05-movies">
       <div className={css.header}>
-        {' '}
         <ul>
           <li>
             <Link className={css.a} to="/">
