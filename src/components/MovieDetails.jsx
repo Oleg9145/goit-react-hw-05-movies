@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, Link, Outlet, useNavigate } from 'react-router-dom';
 import { fetchMovieDetails } from '../server/server';
-import { Cast } from './Cast';
-import { Reviews } from './Reviews';
-
+import css from '../css/cast.module.css';
 const MovieDetails = () => {
   const { movieId } = useParams();
   const navigate = useNavigate();
@@ -29,8 +27,17 @@ const MovieDetails = () => {
         <>
           <h1>{movieDetails.title}</h1>
           <p>{movieDetails.overview}</p>
-          <Cast movieId={movieId} />
-          <Reviews movieId={movieId} />
+
+          <nav className={css.Button}>
+            <Link className={css.Link} to={`/movies/${movieId}/cast`}>
+              Cast
+            </Link>
+            <Link className={css.Link} to={`/movies/${movieId}/reviews`}>
+              Reviews
+            </Link>
+          </nav>
+
+          <Outlet />
         </>
       ) : (
         <p>Loading...</p>

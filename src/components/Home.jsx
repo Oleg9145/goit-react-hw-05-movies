@@ -25,7 +25,7 @@ const Home = () => {
       <ul>
         {movies.map(movie => (
           <li key={movie.id}>
-            <Link to={`/movie/${movie.id}`}>
+            <Link to={`/movies/${movie.id}`}>
               <img src={movie.posterURL} alt={movie.title} />
               {movie.title}
             </Link>

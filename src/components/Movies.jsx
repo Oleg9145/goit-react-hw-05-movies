@@ -8,28 +8,23 @@ const Movies = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const searchQuery = params.get('query');
+  const getQueryFromUrl = search => {
+    return new URLSearchParams(search).get('query') || '';
+  };
 
-    if (searchQuery) {
-      setQuery(searchQuery);
-      fetchAndSetMovies(searchQuery);
+  useEffect(() => {
+    const queryFromUrl = getQueryFromUrl(location.search);
+    setQuery(queryFromUrl);
+
+    if (queryFromUrl) {
+      fetchMovies(queryFromUrl).then(setSearchResults);
     }
   }, [location.search]);
 
-  const fetchAndSetMovies = async query => {
-    try {
-      const results = await fetchMovies(query);
-      setSearchResults(results);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   const handleSearch = async () => {
+    const results = await fetchMovies(query);
+    setSearchResults(results);
     navigate(`/movies?query=${query}`);
-    fetchAndSetMovies(query);
   };
 
   return (
@@ -45,7 +40,7 @@ const Movies = () => {
       <ul>
         {searchResults.map(movie => (
           <li key={movie.id}>
-            <Link to={`/movie/${movie.id}`}>{movie.title}</Link>
+            <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
           </li>
         ))}
       </ul>

@@ -50,3 +50,31 @@
 .goBackButton:hover {
   background-color: #0056b3;
 }
+.Button {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+}
+.Link {
+  display: inline-block;
+  padding: 10px 15px;
+  margin: 5px;
+  background-color: #007bff;
+  color: white;
+  text-align: center;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.Link:hover {
+  background-color: #0056b3;
+  color: white;
+  text-decoration: none;
+}
+
+.Link:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5);
+}

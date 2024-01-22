@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { fetchMovieReviews } from '../server/server';
-import css from '../css/reviews.module.css';
 
-const Reviews = ({ movieId }) => {
+import css from '../css/reviews.module.css';
+const Reviews = () => {
+  const { movieId } = useParams();
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
@@ -32,5 +34,4 @@ const Reviews = ({ movieId }) => {
     </div>
   );
 };
-
 export { Reviews };

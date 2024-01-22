@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { fetchCast } from '../server/server';
-import css from '../css/cast.module.css';
 
-const Cast = ({ movieId }) => {
+import css from '../css/cast.module.css';
+const Cast = () => {
+  const { movieId } = useParams();
   const [cast, setCast] = useState([]);
 
   useEffect(() => {
