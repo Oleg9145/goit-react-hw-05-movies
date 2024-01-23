@@ -17,19 +17,35 @@ const Movies = () => {
     setQuery(queryFromUrl);
 
     if (queryFromUrl) {
-      fetchMovies(queryFromUrl).then(setSearchResults);
+      fetchMovies(queryFromUrl).then(movies => {
+        setSearchResults(movies);
+
+        navigate(`/movies?query=${queryFromUrl}`, {
+          replace: true,
+          state: { from: location.pathname },
+        });
+      });
     }
-  }, [location.search]);
+  }, [location.pathname, location.search, navigate]);
 
   const handleSearch = async () => {
     const results = await fetchMovies(query);
     setSearchResults(results);
-    navigate(`/movies?query=${query}`);
+
+    navigate(`/movies?query=${query}`, { state: { from: location.pathname } });
+  };
+
+  const handleGoBack = () => {
+    if (location.state?.from) {
+      navigate(location.state.from);
+    } else {
+      navigate('/');
+    }
   };
 
   return (
     <div>
-      <button onClick={() => navigate(-1)}>Go Back</button>
+      <button onClick={handleGoBack}>Go Back</button>
       <h1>Search Movies</h1>
       <input
         type="text"
@@ -40,7 +56,12 @@ const Movies = () => {
       <ul>
         {searchResults.map(movie => (
           <li key={movie.id}>
-            <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
+            <Link
+              to={`/movies/${movie.id}`}
+              state={{ from: `/movies?query=${query}` }}
+            >
+              {movie.title}
+            </Link>
           </li>
         ))}
       </ul>
